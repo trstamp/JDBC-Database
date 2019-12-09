@@ -7,7 +7,7 @@ public class Lab4 {
 		Connection conn = null;
         try {
             // db parameters
-            String url = *Put your URL here*;
+            String url = /*Put your URL here*/;
             // create a connection to the database
             conn = DriverManager.getConnection(url);
 
