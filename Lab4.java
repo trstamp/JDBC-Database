@@ -62,7 +62,7 @@ public class Lab4 {
 					String sql = "SELECT * "
 							+ "FROM ActualTripStopInfo "
 							+ "WHERE TripNumber =" + ans + "AND ScheduledStartTime =" 
-							+ ans2 + "AND StopNumber =" + ans3;
+							+ ans2 + "AND StopNumber =" + ans3 + ";";
 					st.executeUpdate(sql);
 				}catch (SQLException e) {
 					e.printStackTrace();
@@ -79,20 +79,29 @@ public class Lab4 {
 				}
 			}
 			else if(option == 3) {
+				System.out.print("Insert Trip Number: ");
+				int num = sc.nextInt();
 				try {
 					Connection conn = this.Connect();
 					Statement st = conn.createStatement();
-					String sql = "";
+					String sql = "SELECT * FROM TripStopInfo" +
+								"WHERE TripNumber =" + num + ";";
 					st.executeUpdate(sql);
 				}catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
 			else if(option == 4) {
+				System.out.print("Enter Driver Name: ");
+				String name = sc.nextLine();
+				System.out.print("Enter Date");
+				String date = sc.nextLine();
 				try {
 					Connection conn = this.Connect();
 					Statement st = conn.createStatement();
-					String sql = "";
+					String sql = "SELECT *"
+								+ "FROM TripOffering"
+								+ "WHERE DriverName =" + name + "AND Date =" + date + ";";
 					st.executeUpdate(sql);
 				}catch (SQLException e) {
 					e.printStackTrace();
@@ -145,17 +154,15 @@ public class Lab4 {
 				}
 			}
 			else if(option == 9) {
-				System.out.print("Which trip would you like to see info for? ");
+				System.out.print("Which trip would you like to add? ");
 				int ans = sc.nextInt();
 				String ans2 = sc.nextLine();
 				int ans3 = sc.nextInt();
 				try {
 					Connection conn = this.Connect();
 					Statement st = conn.createStatement();
-					String sql = "SELECT * "
-							+ "FROM ActualTripStopInfo "
-							+ "WHERE TripNumber =" + ans + "AND ScheduledStartTime =" 
-							+ ans2 + "AND StopNumber =" + ans3;
+					String sql = "INSERT INTO ActualTripInfo "
+							+ "VALUES(" + ans + "," + ans2 + "," + ans3 + ")";
 					st.executeUpdate(sql);
 				}catch (SQLException e) {
 					e.printStackTrace();
