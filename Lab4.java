@@ -105,9 +105,7 @@ public class Lab4 {
 					System.out.println("Invalid option. ");
 					MainMenu();
 					option = sc.nextInt();
-				}
-				System.out.print("Enter Trip Number: ");
-				
+				}				
 			}
 			else if(option == 3) {
 				System.out.print("Insert Trip Number: ");
