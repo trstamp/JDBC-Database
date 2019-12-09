@@ -1,5 +1,6 @@
 # JDBC-Database
 Running a database through java
+*Connected to sqlite3*
 TO DO LIST:
 - Option 2
 - Option 3
