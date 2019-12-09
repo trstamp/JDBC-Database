@@ -32,15 +32,6 @@ public class Lab4 {
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		
-		
-		try {
-			Connection conn = this.Connect();
-			Statement st = conn.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
 		int option = 0;
 		while(option != 10) {
 			MainMenu();
@@ -48,11 +39,12 @@ public class Lab4 {
 			if(option > 10) {
 				System.out.println("Invalid Option.");
 				MainMenu();
+				option = sc.nextInt();
 			}
 			if(option == 1) {
 				System.out.print("Enter Start Location: ");
 				String ans = sc.nextLine();
-				System.out.print("Enter Destination: ");
+				System.out.print("\nEnter Destination: ");
 				String ans2 = sc.nextLine();
 				System.out.print("Enter Date: ");
 				String ans3 = sc.nextLine();
@@ -69,14 +61,53 @@ public class Lab4 {
 				}
 			}
 			else if(option == 2) {
-				try {
-					Connection conn = this.Connect();
-					Statement st = conn.createStatement();
-					String sql = "";
-					st.executeUpdate(sql);
-				}catch (SQLException e) {
-					e.printStackTrace();
+				System.out.print("Enter Trip Number: ");
+				int num = sc.nextInt();
+				System.out.print("Would you like to add or delete this trip? ");
+				String ans = sc.nextLine();
+				if(ans == "add") {
+					try {
+						Connection conn = this.Connect();
+						Statement st = conn.createStatement();
+						String sql = "INSERT INTO TripOffering(TripNumber) VALUES(" + num + ");" ;
+						st.executeUpdate(sql);
+					}catch (SQLException e) {
+						e.printStackTrace();
+					}
 				}
+				else if(ans == "delete") {
+					try {
+						Connection conn = this.Connect();
+						Statement st = conn.createStatement();
+						String sql = "DELETE FROM TripOffering"
+									+ "WHERE TripNumber =" + num + ";";
+						st.executeUpdate(sql);
+					}catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				else if(ans == "no") {
+					System.out.print("Would you like to change the bus of this trip? ");
+					String ans2 = sc.nextLine();
+					if(ans2 == "yes") {
+						System.out.print("Enter BusID: ");
+						int num2 = sc.nextInt();
+						String sql = "UPDATE TripOffering"
+									+ "SET BusID =" + num2
+									+ "WHERE TripNumber =" + num + ";";
+					}
+					else {
+						MainMenu();
+						option = sc.nextInt();
+					}
+				}
+				else {
+					System.out.println("Invalid option. ");
+					MainMenu();
+					option = sc.nextInt();
+				}
+				System.out.print("Enter Trip Number: ");
+				
 			}
 			else if(option == 3) {
 				System.out.print("Insert Trip Number: ");
@@ -124,30 +155,43 @@ public class Lab4 {
 				}
 			}
 			else if(option == 6) {
+				System.out.print("Add BusID: ");
+				int ID = sc.nextInt();
+				System.out.print("Add bus model: ");
+				String mod = sc.nextLine();
+				System.out.print("Add bus year: ");
+				int year = sc.nextInt();
 				try {
 					Connection conn = this.Connect();
 					Statement st = conn.createStatement();
-					String sql = "";
+					String sql = "INSERT INTO Bus VALUES(" + ID + "," + mod + "," + year + ");";
 					st.executeUpdate(sql);
+					System.out.println("Insertion complete.");
 				}catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
 			else if(option == 7) {
+				System.out.print("Enter Bus ID for deletion: ");
+				int ID = sc.nextInt();
 				try {
 					Connection conn = this.Connect();
 					Statement st = conn.createStatement();
-					String sql = "";
+					String sql = "DELETE FROM Bus"
+								+ "WHERE BusID =" + ID + ";";
 					st.executeUpdate(sql);
 				}catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
 			else if(option == 8) {
+				System.out.print("Enter DriverName for deletion: ");
+				String name = sc.nextLine();
 				try {
 					Connection conn = this.Connect();
 					Statement st = conn.createStatement();
-					String sql = "";
+					String sql = "DELETE FROM Driver"
+								+ "WHERE DriverName =" + name + ";";
 					st.executeUpdate(sql);
 				}catch (SQLException e) {
 					e.printStackTrace();
@@ -172,7 +216,6 @@ public class Lab4 {
 				System.exit(0);
 			}
 		}
-		
 	}
 	
 	public void MainMenu() {
