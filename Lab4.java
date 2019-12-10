@@ -7,7 +7,7 @@ public class Lab4 {
 		Connection conn = null;
         try {
             // db parameters
-            String url = "jdbc:sqlite:C:\\Users\\stamp\\OneDrive\\Desktop\\IDEs\\Lab4.db";
+            String url = /*Path to sqlite database*/;
             // create a connection to the database
             conn = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
