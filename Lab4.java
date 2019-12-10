@@ -7,12 +7,12 @@ public class Lab4 {
 		Connection conn = null;
         try {
             // db parameters
-            String url = /*Put your URL here*/;
+            String url = "jdbc:sqlite:C:\\Users\\stamp\\OneDrive\\Desktop\\IDEs\\Lab4.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
-
             System.out.println("Connection to SQLite has been established.");
-
+            return conn;
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -24,7 +24,7 @@ public class Lab4 {
                 System.out.println(ex.getMessage());
             }
         }
-        return conn;
+        return null;
 	}
 	
 	public void transactions() {
@@ -42,11 +42,11 @@ public class Lab4 {
 				option = sc.nextInt();
 			}
 			if(option == 1) {
-				System.out.print("Enter Start Location: ");
+				System.out.println("Enter Start Location: ");
 				String ans = sc.nextLine();
-				System.out.print("\nEnter Destination: ");
+				System.out.println("\nEnter Destination: ");
 				String ans2 = sc.nextLine();
-				System.out.print("Enter Date: ");
+				System.out.println("Enter Date: ");
 				String ans3 = sc.nextLine();
 				try {
 					Connection conn = this.Connect();
@@ -61,9 +61,9 @@ public class Lab4 {
 				}
 			}
 			else if(option == 2) {
-				System.out.print("Enter Trip Number: ");
+				System.out.println("Enter Trip Number: ");
 				int num = sc.nextInt();
-				System.out.print("Would you like to add or delete this trip? ");
+				System.out.println("Would you like to add or delete this trip? ");
 				String ans = sc.nextLine();
 				if(ans == "add") {
 					try {
@@ -87,10 +87,10 @@ public class Lab4 {
 					}
 				}
 				else if(ans == "no") {
-					System.out.print("Would you like to change the bus of this trip? ");
+					System.out.println("Would you like to change the bus of this trip? ");
 					String ans2 = sc.nextLine();
 					if(ans2 == "yes") {
-						System.out.print("Enter BusID: ");
+						System.out.println("Enter BusID: ");
 						int num2 = sc.nextInt();
 						String sql = "UPDATE TripOffering"
 									+ "SET BusID =" + num2
@@ -105,10 +105,10 @@ public class Lab4 {
 					System.out.println("Invalid option. ");
 					MainMenu();
 					option = sc.nextInt();
-				}				
+				}
 			}
 			else if(option == 3) {
-				System.out.print("Insert Trip Number: ");
+				System.out.println("Insert Trip Number: ");
 				int num = sc.nextInt();
 				try {
 					Connection conn = this.Connect();
@@ -121,9 +121,9 @@ public class Lab4 {
 				}
 			}
 			else if(option == 4) {
-				System.out.print("Enter Driver Name: ");
+				System.out.println("Enter Driver Name: ");
 				String name = sc.nextLine();
-				System.out.print("Enter Date");
+				System.out.println("Enter Date");
 				String date = sc.nextLine();
 				try {
 					Connection conn = this.Connect();
@@ -137,9 +137,9 @@ public class Lab4 {
 				}
 			}
 			else if(option == 5) {
-				System.out.print("Add Driver Name: ");
+				System.out.println("Add Driver Name: ");
 				String name = sc.nextLine();
-				System.out.print("Enter Driver Phone Number: ");
+				System.out.println("Enter Driver Phone Number: ");
 				String pNum = sc.nextLine();
 				
 				try {
@@ -153,11 +153,11 @@ public class Lab4 {
 				}
 			}
 			else if(option == 6) {
-				System.out.print("Add BusID: ");
+				System.out.println("Add BusID: ");
 				int ID = sc.nextInt();
-				System.out.print("Add bus model: ");
+				System.out.println("Add bus model: ");
 				String mod = sc.nextLine();
-				System.out.print("Add bus year: ");
+				System.out.println("Add bus year: ");
 				int year = sc.nextInt();
 				try {
 					Connection conn = this.Connect();
@@ -170,7 +170,7 @@ public class Lab4 {
 				}
 			}
 			else if(option == 7) {
-				System.out.print("Enter Bus ID for deletion: ");
+				System.out.println("Enter Bus ID for deletion: ");
 				int ID = sc.nextInt();
 				try {
 					Connection conn = this.Connect();
@@ -183,7 +183,7 @@ public class Lab4 {
 				}
 			}
 			else if(option == 8) {
-				System.out.print("Enter DriverName for deletion: ");
+				System.out.println("Enter DriverName for deletion: ");
 				String name = sc.nextLine();
 				try {
 					Connection conn = this.Connect();
@@ -196,7 +196,7 @@ public class Lab4 {
 				}
 			}
 			else if(option == 9) {
-				System.out.print("Which trip would you like to add? ");
+				System.out.println("Which trip would you like to add? ");
 				int ans = sc.nextInt();
 				String ans2 = sc.nextLine();
 				int ans3 = sc.nextInt();
